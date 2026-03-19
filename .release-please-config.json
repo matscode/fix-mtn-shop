@@ -1,0 +1,10 @@
+{
+  "release-type": "node",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "package-name": "fix-mtn-shop",
+      "changelog-path": "CHANGELOG.md"
+    }
+  }
+}
