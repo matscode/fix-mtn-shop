@@ -1,0 +1,36 @@
+name: release-assets
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build and zip extensions
+        run: |
+          yarn zip
+          yarn zip:firefox
+          yarn wxt build -b safari
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          cd .output/safari-mv2
+          zip -r "../../fix-mtn-shop-${TAG_VERSION}-safari-mv2.zip" .
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            .output/*-chrome.zip
+            .output/*-firefox.zip
+            .output/*-sources.zip
+            fix-mtn-shop-*-safari-mv2.zip
