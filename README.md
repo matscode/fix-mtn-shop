@@ -28,13 +28,11 @@ yarn zip:firefox
 
 ## Publishing
 
-WXT provides commands to build ZIPs and submit to Chrome/Firefox stores:
+WXT provides commands to build ZIPs and submit to Firefox:
 
 ```bash
-yarn zip
 yarn zip:firefox
 yarn wxt submit \
-  --chrome-zip .output/*-chrome.zip \
   --firefox-zip .output/*-firefox.zip \
   --firefox-sources-zip .output/*-sources.zip
 ```
@@ -43,10 +41,6 @@ yarn wxt submit \
 
 The GitHub Actions workflow expects these secrets:
 
-- CHROME_EXTENSION_ID
-- CHROME_CLIENT_ID
-- CHROME_CLIENT_SECRET
-- CHROME_REFRESH_TOKEN
 - FIREFOX_EXTENSION_ID
 - FIREFOX_JWT_ISSUER
 - FIREFOX_JWT_SECRET
